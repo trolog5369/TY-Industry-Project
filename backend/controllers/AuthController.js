@@ -47,7 +47,9 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     
     // Find user by email
+    console.log("Login attempt for email:", email);
     const user = await Usermodel.findOne({ email });
+    console.log("User found:", user ? "Yes" : "No");
 
     // If user is not found, send error response
     if (!user) {

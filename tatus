@@ -1,0 +1,119 @@
+warning: in the working copy of 'Frontend/src/component/HomePage.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Frontend/src/component/ProductList.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Frontend/src/component/card.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Frontend/src/component/dashboard.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Frontend/src/component/footer.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Frontend/src/component/login.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Frontend/src/component/navbar.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Frontend/src/index.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Frontend/tailwind.config.js', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/Frontend/package-lock.json b/Frontend/package-lock.json[m
+[1mindex b8dd2a5..5038cac 100644[m
+[1m--- a/Frontend/package-lock.json[m
+[1m+++ b/Frontend/package-lock.json[m
+[36m@@ -5323,6 +5323,7 @@[m
+       "version": "0.487.0",[m
+       "resolved": "https://registry.npmjs.org/lucide-react/-/lucide-react-0.487.0.tgz",[m
+       "integrity": "sha512-aKqhOQ+YmFnwq8dWgGjOuLc8V1R9/c/yOd+zDY4+ohsR2Jo05lSGc3WsstYPIzcTpeosN7LoCkLReUUITvaIvw==",[m
+[32m+[m[32m      "license": "ISC",[m
+       "peerDependencies": {[m
+         "react": "^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0"[m
+       }[m
+[1mdiff --git a/Frontend/src/App.jsx b/Frontend/src/App.jsx[m
+[1mindex f8bef0a..2e19cb5 100644[m
+[1m--- a/Frontend/src/App.jsx[m
+[1m+++ b/Frontend/src/App.jsx[m
+[36m@@ -1,5 +1,6 @@[m
+ import React, { useState } from "react";[m
+ import { Routes, Route, Navigate } from "react-router-dom";[m
+[32m+[m[32mimport CinematicIntro from "./component/CinematicIntro";[m
+ import Signup from "./component/signup";[m
+ import Login from "./component/login";[m
+ import About from "./component/About";[m
+[36m@@ -22,6 +23,7 @@[m [mimport Notes from "./component/Notes";[m
+ [m
+ function App() {[m
+   const [isAuthenticated, setIsAuthenticated] = useState(false);[m
+[32m+[m[32m  const [introComplete, setIntroComplete] = useState(false);[m
+ [m
+   // PrivateRoute to protect routes that need authentication[m
+   const PrivateRoute = ({ element }) => {[m
+[36m@@ -30,6 +32,10 @@[m [mfunction App() {[m
+ [m
+   return ([m
+     <div className="min-h-screen flex flex-col">[m
+[32m+[m[32m      {/* Cinematic Intro — plays once before anything else renders */}[m
+[32m+[m[32m      {!introComplete && ([m
+[32m+[m[32m        <CinematicIntro onComplete={() => setIntroComplete(true)} />[m
+[32m+[m[32m      )}[m
+       {/* RefreshHandler will check authentication on page reload */}[m
+       <RefreshHandler setisAutheticate={setIsAuthenticated} />[m
+       [m
+[36m@@ -39,27 +45,27 @@[m [mfunction App() {[m
+       {/* Main content area */}[m
+       <main className="flex-grow">[m
+         <Routes>[m
+[31m-          {/* Public Routes */}[m
+[32m+[m[32m          {/* Public Routes — no wrapper */}[m
+           <Route path="/" element={<HomePage />} />[m
+           <Route path="/HomePage" element={<HomePage />} />[m
+           <Route path="/signup" element={<Signup />} />[m
+           <Route path="/login" element={<Login setisAutheticate={setIsAuthenticated} />} />[m
+           <Route path="*" element={<NotFoundPage />} />[m
+ [m
+[31m-          {/* Protected Routes (accessible only when authenticated) */}[m
+[31m-          <Route path="/home" element={<PrivateRoute element={<Dashboard />} />} />[m
+[31m-          <Route path="/about" element={<PrivateRoute element={<About />} />} />[m
+[31m-          <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />[m
+[31m-          <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />[m
+[31m-          <Route path="/billgenerator" element={<PrivateRoute element={<BillGenerator />} />} />[m
+[31m-          <Route path="/showbills" element={<PrivateRoute element={<ShowBill />} />} />[m
+[31m-          <Route path="/stockanalysis" element={<PrivateRoute element={<StockAnalysis />} />} />[m
+[31m-          <Route path="/productlist" element={<PrivateRoute element={<ProductList />} />} />[m
+[31m-          <Route path="/inventorymanager" element={<PrivateRoute element={<InventoryManager />} />} />[m
+[31m-          <Route path="/customeraccount" element={<PrivateRoute element={<CustomerAccount />} />} />[m
+[31m-          <Route path="/customer/:customerId" element={<PrivateRoute element={<CustomerHistory />} />} />[m
+[31m-          <Route path="/supplierData" element={<PrivateRoute element={<SupplierData />} />} />[m
+[31m-          <Route path="/notes" element={<PrivateRoute element={<Notes/>} />} />[m
+[32m+[m[32m          {/* Protected Routes — wrapped in app-page for dark bg + proper spacing */}[m
+[32m+[m[32m          <Route path="/home" element={<PrivateRoute element={<div className="app-page"><Dashboard /></div>} />} />[m
+[32m+[m[32m          <Route path="/about" element={<PrivateRoute element={<div className="app-page"><About /></div>} />} />[m
+[32m+[m[32m          <Route path="/profile" element={<PrivateRoute element={<div className="app-page"><Profile /></div>} />} />[m
+[32m+[m[32m          <Route path="/dashboard" element={<PrivateRoute element={<div className="app-page"><Dashboard /></div>} />} />[m
+[32m+[m[32m          <Route path="/billgenerator" element={<PrivateRoute element={<div className="app-page"><BillGenerator /></div>} />} />[m
+[32m+[m[32m          <Route path="/showbills" element={<PrivateRoute element={<div className="app-page"><ShowBill /></div>} />} />[m
+[32m+[m[32m          <Route path="/stockanalysis" element={<PrivateRoute element={<div className="app-page"><StockAnalysis /></div>} />} />[m
+[32m+[m[32m          <Route path="/productlist" element={<PrivateRoute element={<div className="app-page"><ProductList /></div>} />} />[m
+[32m+[m[32m          <Route path="/inventorymanager" element={<PrivateRoute element={<div className="app-page"><InventoryManager /></div>} />} />[m
+[32m+[m[32m          <Route path="/customeraccount" element={<PrivateRoute element={<div className="app-page"><CustomerAccount /></div>} />} />[m
+[32m+[m[32m          <Route path="/customer/:customerId" element={<PrivateRoute element={<div className="app-page"><CustomerHistory /></div>} />} />[m
+[32m+[m[32m          <Route path="/supplierData" element={<PrivateRoute element={<div className="app-page"><SupplierData /></div>} />} />[m
+[32m+[m[32m          <Route path="/notes" element={<PrivateRoute element={<div className="app-page"><Notes /></div>} />} />[m
+         </Routes>[m
+       </main>[m
+     </div>[m
+[1mdiff --git a/Frontend/src/Context/StoreContext.jsx b/Frontend/src/Context/StoreContext.jsx[m
+[1mindex 2f10ecc..9c0562d 100644[m
+[1m--- a/Frontend/src/Context/StoreContext.jsx[m
+[1m+++ b/Frontend/src/Context/StoreContext.jsx[m
+[36m@@ -16,7 +16,7 @@[m [mconst StoreContextProvider = (props) => {[m
+   const [bill, setBill] = useState([]);[m
+ [m
+ [m
+[31m-  const backend_url="http://localhost:3000"[m
+[32m+[m[32m  const backend_url="http://localhost:5000"[m
+ [m
+   [m
+ [m
+[1mdiff --git a/Frontend/src/component/About.jsx b/Frontend/src/component/About.jsx[m
+[1mindex 7ef9438..b158891 100644[m
+[1m--- a/Frontend/src/component/About.jsx[m
+[1m+++ b/Frontend/src/component/About.jsx[m
+[36m@@ -5,32 +5,32 @@[m [mconst About = () => {[m
+   return ([m
+     <>[m
+       <Navbar />[m
+[31m-      <div className="relative">[m
+[32m+[m[32m      <div className="relative bg-[#080C14] min-h-screen">[m
+         {/* Decorative Background */}[m
+[31m-        <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_r

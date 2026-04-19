@@ -116,32 +116,32 @@ function InventoryManager() {
     );
 
     return (
-        <div className="min-h-screen dark-gradient p-4 md:p-8 animate-fade-in">
+        <div className="min-h-screen dark-gradient p-4 md:p-8">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="flex flex-col justify-between gap-6 mb-8 sm:flex-row sm:items-center">
                     <div className="flex-1 min-w-0">
-                        <h1 className="text-3xl font-bold text-white sm:text-4xl text-glow bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">Component Inventory</h1>
-                        <p className="text-gray-400 mt-1">Manage high-precision active stock, drawings, and heat batches</p>
+                        <h1 className="text-[1.75rem] font-bold text-[#E2E8F0]">Component Inventory</h1>
+                        <p className="text-[#94A3B8] mt-1 text-sm">Manage high-precision active stock, drawings, and heat batches</p>
                     </div>
 
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                         <div className="relative flex-1 group">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <FiSearch className="text-pink-400 group-focus-within:text-purple-400 transition-colors" />
+                                <FiSearch className="text-[#0EA5E9]" />
                             </div>
                             <input
                                 type="text"
                                 placeholder="Search drawing or batch..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-10 pr-4 py-2 bg-black/40 border border-white/10 rounded-full focus:ring-2 focus:ring-purple-500/50 focus:border-pink-500 text-white placeholder-gray-500 outline-none transition-all shadow-inner"
+                                className="w-full pl-10 pr-4 py-2 bg-[#0F1927] border border-[rgba(14,165,233,0.15)] rounded-lg focus:border-[#0EA5E9] focus:shadow-[0_0_0_3px_rgba(14,165,233,0.1)] text-[#E2E8F0] placeholder-[#475569] outline-none transition-all"
                             />
                         </div>
 
                         <button
                             onClick={() => setShowAddForm(!showAddForm)}
-                            className="btn-primary px-6 py-2 flex items-center justify-center min-w-[200px]"
+                            className="btn-primary px-6 py-2 flex items-center justify-center min-w-[200px] font-bold"
                         >
                             <FiPlus className="mr-2" size={20} />
                             <span>Add Component</span>
@@ -151,98 +151,100 @@ function InventoryManager() {
 
                 {/* Add Component Form */}
                 {showAddForm && (
-                    <div className="glass-panel rounded-2xl p-6 mb-8 animate-slide-down border-l-4 border-l-pink-500 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-pink-600/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
-                        <div className="flex justify-between items-center mb-6 pb-4 border-b border-white/10 relative z-10">
-                            <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 flex items-center gap-2">
-                                <FiBox className="text-pink-500" /> New Component
+                    <div className="bg-[#0F1927] rounded-[16px] p-6 mb-8 border border-[rgba(14,165,233,0.1)] border-l-4 border-l-[#0EA5E9] relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-[rgba(14,165,233,0.06)] rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
+                        <div className="flex justify-between items-center mb-6 pb-4 border-b border-[rgba(14,165,233,0.1)] relative z-10">
+                            <h2 className="text-2xl font-bold text-[#E2E8F0] flex items-center gap-2">
+                                <FiBox className="text-[#0EA5E9]" /> New Component
                             </h2>
-                            <button onClick={() => setShowAddForm(false)} className="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
+                            <button onClick={() => setShowAddForm(false)} className="p-2 rounded-full hover:bg-[rgba(14,165,233,0.1)] text-[#94A3B8] hover:text-[#E2E8F0] transition-colors">
                                 <FiX size={20} />
                             </button>
                         </div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
                             <div>
-                                <label className="block text-xs font-semibold text-gray-400 mb-1 tracking-wide">Product Code</label>
+                                <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-1 tracking-[0.1em] uppercase">Product Code</label>
                                 <input type="text" value={newProduct.productCode} onChange={(e) => setNewProduct({ ...newProduct, productCode: e.target.value })} className="w-full px-4 py-2 rounded-lg input-glow" />
                             </div>
                             <div>
-                                <label className="block text-xs font-semibold text-gray-400 mb-1 tracking-wide">Component Name</label>
+                                <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-1 tracking-[0.1em] uppercase">Component Name</label>
                                 <input type="text" value={newProduct.name} onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} className="w-full px-4 py-2 rounded-lg input-glow" />
                             </div>
                             <div>
-                                <label className="block text-xs font-semibold text-gray-400 mb-1 tracking-wide">Category</label>
+                                <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-1 tracking-[0.1em] uppercase">Category</label>
                                 {isAddingNewCategory ? (
                                     <div className="flex">
                                         <input type="text" placeholder="New Category" value={newCategoryText} onChange={(e) => setNewCategoryText(e.target.value)} className="w-full px-4 py-2 rounded-l-lg input-glow" />
-                                        <button onClick={handleAddCategory} className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 font-bold rounded-r-lg hover:brightness-110">Add</button>
+                                        <button onClick={handleAddCategory} className="bg-[#0EA5E9] text-[#080C14] px-4 font-bold rounded-r-lg hover:bg-[#38BDF8] transition-colors">Add</button>
                                     </div>
                                 ) : (
                                     <div className="flex">
                                         <select value={newProduct.category} onChange={(e) => {
                                             if(e.target.value === 'ADD_NEW') setIsAddingNewCategory(true);
                                             else setNewProduct({...newProduct, category: e.target.value})
-                                        }} className="w-full px-4 py-2 rounded-lg input-glow [&>option]:text-gray-900">
-                                            <option value="">Select Category...</option>
-                                            {categories.map(c => <option key={c._id} value={c.name}>{c.name}</option>)}
-                                            <option value="ADD_NEW">+ Add New Category</option>
+                                        }} className="w-full px-4 py-2 rounded-lg input-glow" style={{ backgroundColor: '#111C2D', color: '#E2E8F0', border: '1px solid rgba(14,165,233,0.15)' }}>
+                                            <option value="" style={{ backgroundColor: '#111C2D', color: '#94A3B8' }}>Select Category...</option>
+                                            {categories.map(c => <option key={c._id} value={c.name} style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>{c.name}</option>)}
+                                            <option value="ADD_NEW" style={{ backgroundColor: '#111C2D', color: '#0EA5E9' }}>+ Add New Category</option>
                                         </select>
                                     </div>
                                 )}
                             </div>
                             <div>
-                                <label className="block text-xs font-semibold text-gray-400 mb-1 tracking-wide">Material Type</label>
+                                <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-1 tracking-[0.1em] uppercase">Material Type</label>
                                 <input type="text" placeholder="e.g. MS, EN8" value={newProduct.materialType} onChange={(e) => setNewProduct({ ...newProduct, materialType: e.target.value })} className="w-full px-4 py-2 rounded-lg input-glow" />
                             </div>
                             <div>
-                                <label className="block text-xs font-semibold text-gray-400 mb-1 tracking-wide">Stock Quantity</label>
+                                <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-1 tracking-[0.1em] uppercase">Stock Quantity</label>
                                 <input type="number" placeholder="Qty" value={newProduct.quantity} onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })} className="w-full px-4 py-2 rounded-lg input-glow" />
                             </div>
                             <div>
-                                <label className="block text-xs font-semibold text-gray-400 mb-1 tracking-wide">Manufacturing Date</label>
+                                <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-1 tracking-[0.1em] uppercase">Manufacturing Date</label>
                                 <input type="date" value={newProduct.manufacturingDate} onChange={(e) => setNewProduct({ ...newProduct, manufacturingDate: e.target.value })} className="w-full px-4 py-2 rounded-lg input-glow" style={{ colorScheme: 'dark' }} />
                             </div>
                         </div>
 
-                        <div className="mt-8 flex justify-end space-x-3 relative z-10 w-full pt-4 border-t border-white/10">
-                            <button onClick={() => setShowAddForm(false)} className="px-6 py-2 rounded-lg font-bold text-gray-400 hover:text-white hover:bg-white/5 transition-colors">Cancel</button>
-                            <button onClick={addProduct} className="btn-primary px-8 py-2 flex items-center"><FiCheckCircle className="mr-2" /> Confirm Insertion</button>
+                        <div className="mt-8 flex justify-end space-x-3 relative z-10 w-full pt-4 border-t border-[rgba(14,165,233,0.1)]">
+                            <button onClick={() => setShowAddForm(false)} className="px-6 py-2 rounded-lg font-bold text-[#94A3B8] hover:text-[#E2E8F0] hover:bg-[rgba(14,165,233,0.05)] transition-colors">Cancel</button>
+                            <button onClick={addProduct} className="btn-primary px-8 py-2 flex items-center font-bold"><FiCheckCircle className="mr-2" /> Confirm Insertion</button>
                         </div>
                     </div>
                 )}
 
                 {/* Products Table */}
-                <div className="glass-panel rounded-2xl overflow-hidden shadow-2xl">
+                <div className="bg-[#0F1927] rounded-[16px] overflow-hidden border border-[rgba(14,165,233,0.1)]">
                     <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-white/10">
-                            <thead className="bg-[#1a1625]/80 backdrop-blur-sm">
+                        <table className="min-w-full">
+                            <thead className="bg-[#111C2D]">
                                 <tr>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-purple-300 uppercase tracking-wider">Product Code</th>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-purple-300 uppercase tracking-wider">Component Name</th>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-purple-300 uppercase tracking-wider">Category</th>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-purple-300 uppercase tracking-wider">Material Type</th>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-purple-300 uppercase tracking-wider">Stock Quantity</th>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-purple-300 uppercase tracking-wider">Manufacturing Date</th>
-                                    <th className="px-6 py-4 text-right text-xs font-bold text-purple-300 uppercase tracking-wider">Actions</th>
+                                    <th className="px-6 py-4 text-left text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Product Code</th>
+                                    <th className="px-6 py-4 text-left text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Component Name</th>
+                                    <th className="px-6 py-4 text-left text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Category</th>
+                                    <th className="px-6 py-4 text-left text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Material Type</th>
+                                    <th className="px-6 py-4 text-left text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Stock Quantity</th>
+                                    <th className="px-6 py-4 text-left text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Manufacturing Date</th>
+                                    <th className="px-6 py-4 text-right text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="bg-transparent divide-y divide-white/10">
+                            <tbody>
                                 {filteredProducts.length > 0 ? (
                                     filteredProducts.map((product) => (
-                                        <tr key={product._id} className="hover:bg-white/5 transition-all duration-300 group">
-                                            <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-300 font-mono">{product.productCode}</td>
-                                            <td className="px-6 py-5 whitespace-nowrap text-sm font-bold text-white">{product.name}</td>
-                                            <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-400">{product.category}</td>
-                                            <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-300">{product.materialType}</td>
+                                        <tr key={product._id} className="border-b border-[rgba(14,165,233,0.06)] hover:bg-[rgba(14,165,233,0.04)] transition-all duration-300 group">
+                                            <td className="px-6 py-5 whitespace-nowrap text-sm font-mono text-[#94A3B8]">{product.productCode}</td>
+                                            <td className="px-6 py-5 whitespace-nowrap text-sm font-semibold text-[#E2E8F0]">{product.name}</td>
+                                            <td className="px-6 py-5 whitespace-nowrap text-sm text-[#94A3B8]">{product.category}</td>
+                                            <td className="px-6 py-5 whitespace-nowrap text-sm text-[#94A3B8]">{product.materialType}</td>
                                             <td className="px-6 py-5 whitespace-nowrap">
                                                 <span className={`px-3 py-1.5 inline-flex text-sm font-bold rounded-md ${
-                                                    product.quantity < 20 
-                                                    ? 'bg-red-500/20 shadow-[0_0_10px_rgba(239,68,68,0.4)] border border-red-500/50 text-red-300 animate-pulse' 
-                                                    : 'bg-white/5 border border-white/10 text-white'
+                                                    product.quantity === 0 
+                                                    ? 'bg-[rgba(239,68,68,0.1)] text-[#EF4444]' 
+                                                    : product.quantity <= 10 
+                                                    ? 'bg-[rgba(245,158,11,0.1)] text-[#F59E0B]' 
+                                                    : 'bg-[rgba(14,165,233,0.1)] text-[#0EA5E9]'
                                                 }`}>{product.quantity}</span>
                                             </td>
-                                            <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-400">
+                                            <td className="px-6 py-5 whitespace-nowrap text-sm text-[#94A3B8]">
                                                 {product.manufacturingDate ? new Date(product.manufacturingDate).toLocaleDateString() : '-'}
                                             </td>
                                             <td className="px-6 py-5 whitespace-nowrap text-right text-sm">
@@ -251,16 +253,16 @@ function InventoryManager() {
                                                         setProductToUpdate(product);
                                                         setQuantityUpdate({ id: product._id, quantity: product.quantity, minStockLevel: product.minStockLevel, status: product.status || 'Ready' });
                                                         setShowUpdateModal(true);
-                                                    }} className="p-2 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 hover:scale-110 transition-all border border-transparent hover:border-blue-500/30" title="Manage Stock"><FiEdit2 size={16} /></button>
-                                                    <button onClick={() => {setSelectedProduct(product); setShowQRModal(true);}} className="p-2 rounded-lg bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 hover:scale-110 transition-all border border-transparent hover:border-purple-500/30" title="Print Tag"><FiPrinter size={16} /></button>
-                                                    <button onClick={() => deleteProduct(product._id)} className="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:scale-110 transition-all border border-transparent hover:border-red-500/30" title="Delete"><FiTrash2 size={16} /></button>
+                                                    }} className="p-2 rounded-lg bg-[rgba(14,165,233,0.1)] text-[#0EA5E9] hover:bg-[rgba(14,165,233,0.2)] hover:scale-110 transition-all border border-transparent hover:border-[rgba(14,165,233,0.3)]" title="Manage Stock"><FiEdit2 size={16} /></button>
+                                                    <button onClick={() => {setSelectedProduct(product); setShowQRModal(true);}} className="p-2 rounded-lg bg-[rgba(148,163,184,0.1)] text-[#94A3B8] hover:bg-[rgba(148,163,184,0.2)] hover:scale-110 transition-all border border-transparent hover:border-[rgba(148,163,184,0.3)]" title="Print Tag"><FiPrinter size={16} /></button>
+                                                    <button onClick={() => deleteProduct(product._id)} className="p-2 rounded-lg bg-[rgba(239,68,68,0.1)] text-[#EF4444] hover:bg-[rgba(239,68,68,0.2)] hover:scale-110 transition-all border border-transparent hover:border-[rgba(239,68,68,0.3)]" title="Delete"><FiTrash2 size={16} /></button>
                                                 </div>
                                             </td>
                                         </tr>
                                     ))
                                 ) : (
                                     <tr><td colSpan="7" className="px-6 py-12 text-center">
-                                        <div className="flex flex-col items-center justify-center text-gray-500">
+                                        <div className="flex flex-col items-center justify-center text-[#475569]">
                                             <FiBox size={48} className="mb-4 opacity-20" />
                                             <p className="text-lg">No components found in the system.</p>
                                         </div>
@@ -273,32 +275,32 @@ function InventoryManager() {
 
                 {/* Manage Stock Modal */}
                 {showUpdateModal && productToUpdate && (
-                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
-                        <div className="glass-panel border-purple-500/30 rounded-2xl p-8 w-full max-w-sm shadow-[0_0_50px_rgba(168,85,247,0.2)]">
-                            <h2 className="text-2xl font-bold text-white border-b border-white/10 pb-4 mb-6">Update <span className="text-pink-400">{productToUpdate.name}</span></h2>
+                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+                        <div className="bg-[#0F1927] border border-[rgba(14,165,233,0.15)] rounded-[16px] p-8 w-full max-w-sm shadow-[0_0_50px_rgba(14,165,233,0.1)]">
+                            <h2 className="text-2xl font-bold text-[#E2E8F0] border-b border-[rgba(14,165,233,0.1)] pb-4 mb-6">Update <span className="text-[#0EA5E9]">{productToUpdate.name}</span></h2>
                             <div className="space-y-5">
                                 <div>
-                                    <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Status</label>
-                                    <select value={quantityUpdate.status} onChange={(e) => setQuantityUpdate({...quantityUpdate, status: e.target.value})} className="w-full px-4 py-3 rounded-lg input-glow [&>option]:text-gray-900 focus:ring-purple-500">
-                                        <option value="In Production">In Production</option>
-                                        <option value="Ready">Ready</option>
-                                        <option value="Dispatched">Dispatched</option>
+                                    <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Status</label>
+                                    <select value={quantityUpdate.status} onChange={(e) => setQuantityUpdate({...quantityUpdate, status: e.target.value})} className="w-full px-4 py-3 rounded-lg input-glow" style={{ backgroundColor: '#111C2D', color: '#E2E8F0', border: '1px solid rgba(14,165,233,0.15)' }}>
+                                        <option value="In Production" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>In Production</option>
+                                        <option value="Ready" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>Ready</option>
+                                        <option value="Dispatched" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>Dispatched</option>
                                     </select>
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Stock Qty</label>
+                                        <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Stock Qty</label>
                                         <input type="number" value={quantityUpdate.quantity ?? ''} onChange={(e) => setQuantityUpdate({ ...quantityUpdate, quantity: e.target.value })} className="w-full px-4 py-3 rounded-lg input-glow font-mono text-lg text-center" />
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Min Level</label>
+                                        <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Min Level</label>
                                         <input type="number" value={quantityUpdate.minStockLevel ?? ''} onChange={(e) => setQuantityUpdate({ ...quantityUpdate, minStockLevel: e.target.value })} className="w-full px-4 py-3 rounded-lg input-glow font-mono text-lg text-center" />
                                     </div>
                                 </div>
                             </div>
                             <div className="mt-8 flex justify-end space-x-3 w-full">
-                                <button onClick={() => setShowUpdateModal(false)} className="px-5 py-2 rounded-lg font-bold text-gray-400 hover:text-white hover:bg-white/5 transition-colors">Cancel</button>
-                                <button onClick={updateQuantity} className="btn-primary w-full py-3 flex-1 flex justify-center items-center"><FiCheckCircle className="mr-2"/> Save Updates</button>
+                                <button onClick={() => setShowUpdateModal(false)} className="px-5 py-2 rounded-lg font-bold text-[#94A3B8] hover:text-[#E2E8F0] hover:bg-[rgba(14,165,233,0.05)] transition-colors">Cancel</button>
+                                <button onClick={updateQuantity} className="btn-primary w-full py-3 flex-1 flex justify-center items-center font-bold"><FiCheckCircle className="mr-2"/> Save Updates</button>
                             </div>
                         </div>
                     </div>

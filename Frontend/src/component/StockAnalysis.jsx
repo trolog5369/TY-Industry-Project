@@ -4,7 +4,7 @@ import {
   PieChart, Pie, Cell, LineChart, Line, Legend 
 } from 'recharts';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#0EA5E9', '#82ca9d', '#ffc658'];
 
 const StockAnalysis = () => {
   const [data, setData] = useState(null);
@@ -27,7 +27,7 @@ const StockAnalysis = () => {
     const loadAnalysisData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://localhost:3000/api/analysis/data", {
+        const response = await fetch("http://localhost:5000/api/analysis/data", {
           headers: {
             "Authorization": localStorage.getItem("token")
           }
@@ -86,7 +86,7 @@ const StockAnalysis = () => {
           <div className="bg-white rounded-full shadow-md p-1 flex space-x-1 overflow-x-auto w-full max-w-xs sm:max-w-md justify-center">
             <button onClick={() => setActiveSection('both')} className={`px-3 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${activeSection === 'both' ? 'bg-indigo-600 text-white' : 'bg-transparent text-gray-700 hover:bg-gray-100'}`}>All</button>
             <button onClick={() => setActiveSection('products')} className={`px-3 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${activeSection === 'products' ? 'bg-blue-600 text-white' : 'bg-transparent text-gray-700 hover:bg-gray-100'}`}>Products</button>
-            <button onClick={() => setActiveSection('sales')} className={`px-3 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${activeSection === 'sales' ? 'bg-purple-600 text-white' : 'bg-transparent text-gray-700 hover:bg-gray-100'}`}>Sales</button>
+            <button onClick={() => setActiveSection('sales')} className={`px-3 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${activeSection === 'sales' ? 'bg-blue-600 text-white' : 'bg-transparent text-gray-700 hover:bg-gray-100'}`}>Sales</button>
           </div>
         </div>
         
@@ -127,7 +127,7 @@ const StockAnalysis = () => {
                 <div className="p-4" style={{ height: chartHeight }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
-                      <Pie data={data.stockStatus} cx="50%" cy="50%" labelLine={false} label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`} outerRadius={80} fill="#8884d8" dataKey="value">
+                      <Pie data={data.stockStatus} cx="50%" cy="50%" labelLine={false} label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`} outerRadius={80} fill="#0EA5E9" dataKey="value">
                         {data.stockStatus.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
                       </Pie>
                       <Tooltip content={renderTooltip} />
@@ -145,7 +145,7 @@ const StockAnalysis = () => {
                 <div className="p-4" style={{ height: chartHeight }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
-                      <Pie data={data.categories} cx="50%" cy="50%" labelLine={false} label={({name, value}) => `${name}`} outerRadius={80} fill="#8884d8" dataKey="value">
+                      <Pie data={data.categories} cx="50%" cy="50%" labelLine={false} label={({name, value}) => `${name}`} outerRadius={80} fill="#0EA5E9" dataKey="value">
                         {data.categories.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[(index + 3) % COLORS.length]} />)}
                       </Pie>
                       <Tooltip content={renderTooltip} />
@@ -170,7 +170,7 @@ const StockAnalysis = () => {
               
               {/* Daily Revenue Timeline */}
               <div className="bg-white rounded-xl shadow-lg border border-gray-100">
-                <div className="bg-gradient-to-r from-indigo-600 to-purple-500 p-3 sm:p-4 text-white font-medium flex items-center justify-between">
+                <div className="bg-gradient-to-r from-indigo-600 to-blue-500 p-3 sm:p-4 text-white font-medium flex items-center justify-between">
                   <h3>💰 Rolling Daily Revenue (30 Days)</h3><span className="bg-white bg-opacity-20 rounded-full px-2 text-xs">LIVE</span>
                 </div>
                 <div className="p-4" style={{ height: chartHeight }}>
@@ -180,7 +180,7 @@ const StockAnalysis = () => {
                       <XAxis dataKey="date" tick={{fontSize: 10}} minTickGap={20} />
                       <YAxis tickFormatter={(val) => `₹${val}`} width={80} tick={{fontSize: 10}} />
                       <Tooltip content={renderTooltip} />
-                      <Line type="monotone" dataKey="revenue" stroke="#8884d8" name="Revenue" strokeWidth={3} activeDot={{ r: 8 }} />
+                      <Line type="monotone" dataKey="revenue" stroke="#0EA5E9" name="Revenue" strokeWidth={3} activeDot={{ r: 8 }} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
@@ -188,7 +188,7 @@ const StockAnalysis = () => {
 
               {/* Transactions Timeline */}
               <div className="bg-white rounded-xl shadow-lg border border-gray-100">
-                <div className="bg-gradient-to-r from-indigo-600 to-purple-500 p-3 sm:p-4 text-white font-medium flex items-center justify-between">
+                <div className="bg-gradient-to-r from-indigo-600 to-blue-500 p-3 sm:p-4 text-white font-medium flex items-center justify-between">
                   <h3>📅 Transactions Volume (30 Days)</h3><span className="bg-white bg-opacity-20 rounded-full px-2 text-xs">LIVE</span>
                 </div>
                 <div className="p-4" style={{ height: chartHeight }}>
@@ -206,7 +206,7 @@ const StockAnalysis = () => {
 
               {/* Top Products */}
               <div className="bg-white rounded-xl shadow-lg border border-gray-100 md:col-span-2">
-                <div className="bg-gradient-to-r from-indigo-600 to-purple-500 p-3 sm:p-4 text-white font-medium flex items-center justify-between">
+                <div className="bg-gradient-to-r from-indigo-600 to-blue-500 p-3 sm:p-4 text-white font-medium flex items-center justify-between">
                   <h3>🏆 Top Selling Products (All Time)</h3><span className="bg-white bg-opacity-20 rounded-full px-2 text-xs">LIVE</span>
                 </div>
                 <div className="p-4" style={{ height: chartHeight }}>

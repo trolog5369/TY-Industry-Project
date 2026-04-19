@@ -82,36 +82,36 @@ const CustomerAccount = () => {
     };
 
     return (
-        <div className="min-h-screen dark-gradient p-4 md:p-8 animate-fade-in">
+        <div className="min-h-screen dark-gradient p-4 md:p-8">
             <ToastContainer theme="dark" />
             
             <div className="max-w-7xl mx-auto">
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row justify-between gap-6 mb-8 lg:items-center">
                     <div>
-                        <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent flex items-center gap-3">
-                            <FiBriefcase className="text-blue-500" /> B2B Client Directory
+                        <h1 className="text-[1.75rem] font-bold text-[#E2E8F0] flex items-center gap-3">
+                            <FiBriefcase className="text-[#0EA5E9]" /> B2B Client Directory
                         </h1>
-                        <p className="text-gray-400 mt-2">Manage OEM partners, vendors, and industrial clients</p>
+                        <p className="text-[#94A3B8] mt-2 text-sm">Manage OEM partners, vendors, and industrial clients</p>
                     </div>
                     
                     <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
                         <div className="relative group flex-1">
                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <FiSearch className="text-blue-400 group-focus-within:text-purple-400 transition-colors" />
+                                <FiSearch className="text-[#0EA5E9]" />
                             </div>
                             <input
                                 type="text"
                                 placeholder="Search by company or GSTIN..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 rounded-full focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 text-white placeholder-gray-500 outline-none transition-all shadow-inner"
+                                className="w-full pl-11 pr-4 py-3 bg-[#0F1927] border border-[rgba(14,165,233,0.15)] rounded-lg focus:border-[#0EA5E9] focus:shadow-[0_0_0_3px_rgba(14,165,233,0.1)] text-[#E2E8F0] placeholder-[#475569] outline-none transition-all"
                             />
                         </div>
                         
                         <button
                             onClick={() => setShowAddForm(!showAddForm)}
-                            className="btn-primary flex items-center justify-center px-6 py-3 min-w-[200px]"
+                            className="btn-primary flex items-center justify-center px-6 py-3 min-w-[200px] font-bold"
                         >
                             <FiPlus className="mr-2" size={20} />
                             {showAddForm ? 'Cancel Entry' : 'Add New Client'}
@@ -121,51 +121,51 @@ const CustomerAccount = () => {
 
                 {/* Add Customer Form */}
                 {showAddForm && (
-                    <div className="glass-panel p-8 mb-10 rounded-2xl animate-slide-down border-l-4 border-l-blue-500 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
-                        <div className="flex justify-between items-center mb-6 pb-4 border-b border-white/10">
-                            <h2 className="text-2xl font-bold text-white flex items-center gap-2"><FiUsers className="text-blue-400" /> Register Client</h2>
-                            <button onClick={() => setShowAddForm(false)} className="text-gray-400 hover:text-white transition-colors"><FiX size={24} /></button>
+                    <div className="bg-[#0F1927] p-8 mb-10 rounded-[16px] border border-[rgba(14,165,233,0.1)] border-l-4 border-l-[#0EA5E9] relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-[rgba(14,165,233,0.06)] rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
+                        <div className="flex justify-between items-center mb-6 pb-4 border-b border-[rgba(14,165,233,0.1)]">
+                            <h2 className="text-2xl font-bold text-[#E2E8F0] flex items-center gap-2"><FiUsers className="text-[#0EA5E9]" /> Register Client</h2>
+                            <button onClick={() => setShowAddForm(false)} className="text-[#94A3B8] hover:text-[#E2E8F0] transition-colors"><FiX size={24} /></button>
                         </div>
                         
                         <form onSubmit={handleAddCustomer} className="space-y-6 relative z-10">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div>
-                                    <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Company Name *</label>
+                                    <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Company Name *</label>
                                     <input type="text" name="companyName" value={newCustomer.companyName} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg input-glow" required />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">GSTIN *</label>
-                                    <input type="text" name="gstin" value={newCustomer.gstin} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg input-glow border-blue-500/50 bg-blue-900/10 focus:border-blue-500 font-mono" required />
+                                    <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">GSTIN *</label>
+                                    <input type="text" name="gstin" value={newCustomer.gstin} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg input-glow font-mono" required />
                                 </div>
                             </div>
                             
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div>
-                                    <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Contact Person *</label>
+                                    <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Contact Person *</label>
                                     <input type="text" name="contactPersonName" value={newCustomer.contactPersonName} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg input-glow" required />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Phone Number *</label>
+                                    <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Phone Number *</label>
                                     <input type="tel" name="phoneNumber" value={newCustomer.phoneNumber} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg input-glow" required />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Industry Type</label>
-                                    <select name="industryType" value={newCustomer.industryType} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg input-glow [&>option]:text-gray-900">
-                                        <option value="Automotive">Automotive</option>
-                                        <option value="Construction">Construction</option>
-                                        <option value="OEM">OEM</option>
-                                        <option value="Vendor">Vendor</option>
-                                        <option value="Other">Other</option>
+                                    <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Industry Type</label>
+                                    <select name="industryType" value={newCustomer.industryType} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg input-glow" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>
+                                        <option value="Automotive" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>Automotive</option>
+                                        <option value="Construction" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>Construction</option>
+                                        <option value="OEM" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>OEM</option>
+                                        <option value="Vendor" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>Vendor</option>
+                                        <option value="Other" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>Other</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div className="flex justify-end pt-4 border-t border-white/10 space-x-4">
-                                <button type="button" onClick={() => setShowAddForm(false)} className="px-6 py-3 rounded-lg font-bold text-gray-400 hover:text-white hover:bg-white/5 transition-colors">Cancel</button>
-                                <button type="submit" className="btn-primary px-8 py-3 flex items-center" disabled={loading}>
+                            <div className="flex justify-end pt-4 border-t border-[rgba(14,165,233,0.1)] space-x-4">
+                                <button type="button" onClick={() => setShowAddForm(false)} className="px-6 py-3 rounded-lg font-bold text-[#94A3B8] hover:text-[#E2E8F0] hover:bg-[rgba(14,165,233,0.05)] transition-colors">Cancel</button>
+                                <button type="submit" className="btn-primary px-8 py-3 flex items-center font-bold" disabled={loading}>
                                     {loading ? (
-                                        <><span className="animate-spin mr-2 border-2 border-white border-t-transparent rounded-full w-5 h-5"></span> Registering...</>
+                                        <><span className="animate-spin mr-2 border-2 border-[#080C14] border-t-transparent rounded-full w-5 h-5"></span> Registering...</>
                                     ) : 'Complete Registration'}
                                 </button>
                             </div>
@@ -174,47 +174,47 @@ const CustomerAccount = () => {
                 )}
 
                 {/* Customers Table */}
-                <div className="glass-panel rounded-2xl shadow-2xl overflow-hidden">
+                <div className="bg-[#0F1927] rounded-[16px] overflow-hidden border border-[rgba(14,165,233,0.1)]">
                     <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-white/10">
-                            <thead className="bg-[#1a1625]/80 backdrop-blur-sm">
+                        <table className="min-w-full">
+                            <thead className="bg-[#111C2D]">
                                 <tr>
-                                    <th className="px-6 py-5 text-left text-xs font-bold text-blue-300 uppercase tracking-wider">Partner Entity</th>
-                                    <th className="px-6 py-5 text-left text-xs font-bold text-blue-300 uppercase tracking-wider">Tax ID (GSTIN)</th>
-                                    <th className="px-6 py-5 text-left text-xs font-bold text-blue-300 uppercase tracking-wider">Operations Contact</th>
-                                    <th className="px-6 py-5 text-right text-xs font-bold text-blue-300 uppercase tracking-wider">Actions</th>
+                                    <th className="px-6 py-5 text-left text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Partner Entity</th>
+                                    <th className="px-6 py-5 text-left text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Tax ID (GSTIN)</th>
+                                    <th className="px-6 py-5 text-left text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Operations Contact</th>
+                                    <th className="px-6 py-5 text-right text-[0.75rem] font-bold text-[#94A3B8] uppercase tracking-[0.1em] border-b border-[rgba(14,165,233,0.1)]">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/10">
+                            <tbody>
                                 {filteredCustomers.length > 0 ? (
                                     filteredCustomers.map((customer) => (
-                                        <tr key={customer._id} className="hover:bg-white/5 transition-all duration-300 group">
+                                        <tr key={customer._id} className="border-b border-[rgba(14,165,233,0.06)] hover:bg-[rgba(14,165,233,0.04)] transition-all duration-300 group">
                                             <td className="px-6 py-5 whitespace-nowrap">
                                                 <div className="flex items-center">
-                                                    <div className="flex-shrink-0 h-12 w-12 bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/30 rounded-xl flex items-center justify-center transform group-hover:scale-110 transition-transform">
-                                                        <span className="text-blue-400 font-extrabold text-lg">
+                                                    <div className="flex-shrink-0 h-12 w-12 bg-[rgba(14,165,233,0.15)] rounded-xl flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                                                        <span className="text-[#0EA5E9] font-bold text-lg">
                                                             {customer.companyName?.charAt(0).toUpperCase()}
                                                         </span>
                                                     </div>
                                                     <div className="ml-5">
-                                                        <div className="text-base font-bold text-white tracking-wide">{customer.companyName}</div>
-                                                        <div className="text-xs text-blue-400 mt-1 uppercase tracking-widest">{customer.industryType}</div>
+                                                        <div className="text-base font-bold text-[#E2E8F0] tracking-wide">{customer.companyName}</div>
+                                                        <div className={`text-xs mt-1 uppercase tracking-widest font-semibold ${customer.industryType === 'Automotive' ? 'text-[#0EA5E9]' : customer.industryType === 'Construction' ? 'text-[#F59E0B]' : 'text-[#94A3B8]'}`}>{customer.industryType}</div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-5 whitespace-nowrap">
-                                                <div className="text-sm font-mono text-gray-300 border border-white/10 bg-black/40 px-3 py-1.5 rounded-lg inline-block shadow-inner group-hover:border-blue-500/30 transition-colors">
+                                                <div className="text-[0.75rem] font-mono text-[#94A3B8] border border-[rgba(14,165,233,0.1)] bg-[#111C2D] px-3 py-1.5 rounded-lg inline-block">
                                                     {customer.gstin}
                                                 </div>
                                             </td>
                                             <td className="px-6 py-5 whitespace-nowrap">
-                                                <div className="text-sm text-gray-200 font-medium flex items-center gap-2"><FiUser className="text-gray-500" /> {customer.contactPersonName}</div>
-                                                <div className="text-xs text-gray-500 mt-1">{customer.phoneNumber}</div>
+                                                <div className="text-sm text-[#E2E8F0] font-medium flex items-center gap-2"><FiUser className="text-[#94A3B8]" /> {customer.contactPersonName}</div>
+                                                <div className="text-xs text-[#475569] mt-1">{customer.phoneNumber}</div>
                                             </td>
                                             <td className="px-6 py-5 whitespace-nowrap text-right">
                                                 <button
                                                     onClick={() => handleViewHistory(customer._id)}
-                                                    className="inline-flex items-center px-4 py-2 border border-blue-500/30 text-sm font-bold rounded-lg text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 hover:text-blue-300 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+                                                    className="inline-flex items-center px-4 py-2 border border-[rgba(14,165,233,0.2)] text-sm font-bold rounded-lg text-[#0EA5E9] bg-[rgba(14,165,233,0.1)] hover:bg-[rgba(14,165,233,0.2)] transition-all duration-300"
                                                 >
                                                     <FiEye className="mr-2" size={16} /> Ledger
                                                 </button>
@@ -225,13 +225,13 @@ const CustomerAccount = () => {
                                     <tr>
                                         <td colSpan="4" className="px-6 py-16 text-center">
                                             <div className="flex flex-col items-center justify-center">
-                                                <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-4">
-                                                    <FiUsers className="h-10 w-10 text-gray-500 opacity-50" />
+                                                <div className="w-20 h-20 bg-[rgba(14,165,233,0.1)] rounded-full flex items-center justify-center mb-4">
+                                                    <FiUsers className="h-10 w-10 text-[#475569] opacity-50" />
                                                 </div>
-                                                <h3 className="text-lg font-bold text-gray-300">
+                                                <h3 className="text-lg font-bold text-[#94A3B8]">
                                                     {searchTerm ? 'No matching partners found' : 'No clients registered'}
                                                 </h3>
-                                                <p className="mt-2 text-sm text-gray-500 max-w-sm">
+                                                <p className="mt-2 text-sm text-[#475569] max-w-sm">
                                                     {searchTerm ? 'Adjust your search queries.' : 'Begin your B2B journey by onboarding your first industrial client.'}
                                                 </p>
                                             </div>

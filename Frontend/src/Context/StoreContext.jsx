@@ -16,7 +16,7 @@ const StoreContextProvider = (props) => {
   const [bill, setBill] = useState([]);
 
 
-  const backend_url="http://localhost:3000"
+  const backend_url="http://localhost:5000"
 
   
 

@@ -69,20 +69,80 @@ const ProductList = () => {
     return 'fresh';
   };
 
+  /* ── inline style helpers ── */
+  const pageBg = {
+    minHeight: '100vh',
+    background: '#080C14',
+    padding: '2rem',
+  };
+
+  const cardBg = {
+    background: '#0F1927',
+    border: '1px solid rgba(14,165,233,0.1)',
+    borderRadius: '0.75rem',
+  };
+
+  const searchBarStyle = {
+    width: '100%',
+    paddingLeft: '2.5rem',
+    paddingRight: '1rem',
+    paddingTop: '0.625rem',
+    paddingBottom: '0.625rem',
+    background: '#080C14',
+    border: '1px solid rgba(14,165,233,0.15)',
+    borderRadius: '0.5rem',
+    color: '#E2E8F0',
+    outline: 'none',
+    fontSize: '0.875rem',
+  };
+
+  const selectStyle = {
+    backgroundColor: '#111C2D',
+    border: '1px solid rgba(14,165,233,0.15)',
+    borderRadius: '0.5rem',
+    padding: '0.625rem 1rem',
+    color: '#E2E8F0',
+    outline: 'none',
+    fontSize: '0.875rem',
+    cursor: 'pointer',
+  };
+
+  const statCardStyle = {
+    ...cardBg,
+    padding: '1.5rem',
+  };
+
+  const productCardStyle = (status) => ({
+    ...cardBg,
+    overflow: 'hidden',
+    transition: 'all 0.3s ease',
+    borderLeft: status === 'out-of-stock'
+      ? '4px solid #EF4444'
+      : status === 'low-stock'
+        ? '4px solid #F59E0B'
+        : '1px solid rgba(14,165,233,0.1)',
+  });
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div style={pageBg}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
         {/* Header Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10"
+          style={{ textAlign: 'center', marginBottom: '2.5rem' }}
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+          <h1 style={{
+            fontSize: '2rem',
+            fontWeight: 700,
+            color: '#F1F5F9',
+            marginBottom: '0.5rem',
+            letterSpacing: '-0.025em',
+          }}>
             {loggedInUser}'s Product Inventory
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p style={{ color: '#94A3B8', maxWidth: '42rem', margin: '0 auto', fontSize: '0.95rem' }}>
             Manage and track all your products in one place
           </p>
         </motion.div>
@@ -92,15 +152,22 @@ const ProductList = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="bg-white rounded-xl shadow-md p-6 mb-8"
+          style={{ ...cardBg, padding: '1.5rem', marginBottom: '2rem' }}
         >
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-1">
-              <FiSearch className="absolute left-3 top-3 text-gray-400" />
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <div style={{ position: 'relative', flex: 1, minWidth: '200px' }}>
+              <FiSearch style={{
+                position: 'absolute',
+                left: '0.75rem',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: '#64748B',
+                fontSize: '1rem',
+              }} />
               <input
                 type="text"
                 placeholder="Search products by name..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                style={searchBarStyle}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -109,11 +176,11 @@ const ProductList = () => {
             <select
               value={filterOption}
               onChange={(e) => setFilterOption(e.target.value)}
-              className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={selectStyle}
             >
-              <option value="all">All Products</option>
-              <option value="lowStock">Low Stock</option>
-              <option value="expiring">Expiring Soon</option>
+              <option value="all" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>All Products</option>
+              <option value="lowStock" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>Low Stock</option>
+              <option value="expiring" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>Expiring Soon</option>
             </select>
           </div>
         </motion.div>
@@ -123,23 +190,28 @@ const ProductList = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '1.5rem',
+            marginBottom: '2rem',
+          }}
         >
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3 className="text-sm font-medium text-gray-500 mb-1">Total Products</h3>
-            <p className="text-3xl font-bold text-blue-600">{products.length}</p>
+          <div style={statCardStyle}>
+            <h3 style={{ fontSize: '0.8rem', fontWeight: 500, color: '#64748B', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Products</h3>
+            <p style={{ fontSize: '2rem', fontWeight: 700, color: '#0EA5E9' }}>{products.length}</p>
           </div>
           
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3 className="text-sm font-medium text-gray-500 mb-1">Low Stock Items</h3>
-            <p className="text-3xl font-bold text-orange-500">
+          <div style={statCardStyle}>
+            <h3 style={{ fontSize: '0.8rem', fontWeight: 500, color: '#64748B', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Low Stock Items</h3>
+            <p style={{ fontSize: '2rem', fontWeight: 700, color: '#F59E0B' }}>
               {products.filter(p => p.quantity <= p.reorderLevel).length}
             </p>
           </div>
           
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3 className="text-sm font-medium text-gray-500 mb-1">Expiring Soon</h3>
-            <p className="text-3xl font-bold text-red-500">
+          <div style={statCardStyle}>
+            <h3 style={{ fontSize: '0.8rem', fontWeight: 500, color: '#64748B', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Expiring Soon</h3>
+            <p style={{ fontSize: '2rem', fontWeight: 700, color: '#EF4444' }}>
               {products.filter(p => {
                 const today = new Date();
                 const expDate = new Date(p.expirationDate);
@@ -151,136 +223,210 @@ const ProductList = () => {
 
         {/* Product Grid */}
         {isLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '16rem' }}>
+            <div style={{
+              width: '3rem',
+              height: '3rem',
+              border: '3px solid rgba(14,165,233,0.15)',
+              borderTop: '3px solid #0EA5E9',
+              borderRadius: '50%',
+              animation: 'spin 1s linear infinite',
+            }}></div>
+            <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
           </div>
         ) : filteredProducts.length > 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+              gap: '1.5rem',
+            }}
           >
-            {filteredProducts.map((product, index) => (
-              <motion.div
-                key={product._id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05, duration: 0.3 }}
-                whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
-                className={`bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 ${
-                  getStockStatus(product.quantity, product.reorderLevel) === 'out-of-stock' ? 'border-l-4 border-red-500' :
-                  getStockStatus(product.quantity, product.reorderLevel) === 'low-stock' ? 'border-l-4 border-yellow-500' : ''
-                }`}
-              >
-                <div className="p-6">
-                  {/* Product Header */}
-                  <div className="flex justify-between items-start mb-3">
-                    <h2 className="text-xl font-bold text-gray-800 truncate">{product.name}</h2>
-                    {getStockStatus(product.quantity, product.reorderLevel) === 'low-stock' && (
-                      <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full flex items-center">
-                        <FiAlertTriangle className="mr-1" /> Low Stock
-                      </span>
-                    )}
-                    {getStockStatus(product.quantity, product.reorderLevel) === 'out-of-stock' && (
-                      <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Out of Stock</span>
-                    )}
-                  </div>
+            {filteredProducts.map((product, index) => {
+              const stockStatus = getStockStatus(product.quantity, product.reorderLevel);
+              const expStatus = getExpirationStatus(product.expirationDate);
 
-                  {/* Price Information */}
-                  <div className="flex items-center mb-4">
-                    <span className="text-2xl font-bold text-blue-600 mr-2">
-                      ₹{product.sellingPrice}
-                    </span>
-                    {product.actualPrice && (
-                      <span className="text-sm text-gray-500 line-through">
-                        ₹{product.actualPrice}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Stock Information */}
-                  <div className="mb-4">
-                    <div className="flex justify-between text-sm text-gray-600 mb-1">
-                      <span>Quantity:</span>
-                      <span className="font-medium">{product.quantity} units</span>
+              return (
+                <motion.div
+                  key={product._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
+                  whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(14,165,233,0.08)' }}
+                  style={productCardStyle(stockStatus)}
+                >
+                  <div style={{ padding: '1.5rem' }}>
+                    {/* Product Header */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                      <h2 style={{
+                        fontSize: '1.125rem',
+                        fontWeight: 700,
+                        color: '#F1F5F9',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        maxWidth: '70%',
+                      }}>{product.name}</h2>
+                      {stockStatus === 'low-stock' && (
+                        <span style={{
+                          background: 'rgba(245,158,11,0.15)',
+                          color: '#F59E0B',
+                          fontSize: '0.7rem',
+                          padding: '0.2rem 0.5rem',
+                          borderRadius: '9999px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.25rem',
+                          fontWeight: 600,
+                        }}>
+                          <FiAlertTriangle style={{ fontSize: '0.65rem' }} /> Low Stock
+                        </span>
+                      )}
+                      {stockStatus === 'out-of-stock' && (
+                        <span style={{
+                          background: 'rgba(239,68,68,0.15)',
+                          color: '#EF4444',
+                          fontSize: '0.7rem',
+                          padding: '0.2rem 0.5rem',
+                          borderRadius: '9999px',
+                          fontWeight: 600,
+                        }}>Out of Stock</span>
+                      )}
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className={`h-2 rounded-full ${
-                          getStockStatus(product.quantity, product.reorderLevel) === 'out-of-stock' ? 'bg-red-500' :
-                          getStockStatus(product.quantity, product.reorderLevel) === 'low-stock' ? 'bg-yellow-500' : 'bg-green-500'
-                        }`}
-                        style={{ width: `${Math.min(100, (product.quantity / (product.reorderLevel * 3)) * 100)}%` }}
-                      ></div>
-                    </div>
-                  </div>
 
-                  {/* Expiration Status */}
-                  <div className="mb-4">
-                    <div className="flex justify-between text-sm text-gray-600 mb-1">
-                      <span>Expires:</span>
-                      <span className={`font-medium ${
-                        getExpirationStatus(product.expirationDate) === 'expired' ? 'text-red-600' :
-                        getExpirationStatus(product.expirationDate) === 'expiring-soon' ? 'text-yellow-600' : 'text-green-600'
-                      }`}>
-                        {new Date(product.expirationDate).toLocaleDateString()}
-                        {getExpirationStatus(product.expirationDate) === 'expired' && ' (Expired)'}
-                        {getExpirationStatus(product.expirationDate) === 'expiring-soon' && ' (Soon)'}
+                    {/* Price Information */}
+                    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+                      <span style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0EA5E9', marginRight: '0.5rem' }}>
+                        ₹{product.sellingPrice}
                       </span>
+                      {product.actualPrice && (
+                        <span style={{ fontSize: '0.85rem', color: '#475569', textDecoration: 'line-through' }}>
+                          ₹{product.actualPrice}
+                        </span>
+                      )}
                     </div>
-                  </div>
 
-                  {/* Additional Details */}
-                  <div className="space-y-2 text-sm text-gray-600">
-                    {product.reorderLevel && (
-                      <div className="flex justify-between">
-                        <span>Reorder Level:</span>
-                        <span>{product.reorderLevel}</span>
+                    {/* Stock Information */}
+                    <div style={{ marginBottom: '1rem' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '0.35rem' }}>
+                        <span>Quantity:</span>
+                        <span style={{ fontWeight: 500 }}>{product.quantity} units</span>
                       </div>
-                    )}
-                    {product.category && (
-                      <div className="flex justify-between">
-                        <span>Category:</span>
-                        <span className="text-blue-600">{product.category}</span>
+                      <div style={{ width: '100%', background: 'rgba(14,165,233,0.08)', borderRadius: '9999px', height: '0.4rem' }}>
+                        <div
+                          style={{
+                            height: '0.4rem',
+                            borderRadius: '9999px',
+                            background: stockStatus === 'out-of-stock' ? '#EF4444'
+                              : stockStatus === 'low-stock' ? '#F59E0B' : '#22C55E',
+                            width: `${Math.min(100, (product.quantity / (product.reorderLevel * 3)) * 100)}%`,
+                            transition: 'width 0.5s ease',
+                          }}
+                        ></div>
                       </div>
-                    )}
-                  </div>
+                    </div>
 
-                  {/* Action Buttons */}
-                  <div className="mt-6 flex space-x-2">
-                    <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors">
-                      <FiShoppingCart className="inline mr-2" /> Add to Cart
-                    </button>
-                    <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-3 rounded-lg transition-colors">
-                      <FiStar />
-                    </button>
+                    {/* Expiration Status */}
+                    <div style={{ marginBottom: '1rem' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '0.25rem' }}>
+                        <span>Expires:</span>
+                        <span style={{
+                          fontWeight: 500,
+                          color: expStatus === 'expired' ? '#EF4444'
+                            : expStatus === 'expiring-soon' ? '#F59E0B' : '#22C55E',
+                        }}>
+                          {new Date(product.expirationDate).toLocaleDateString()}
+                          {expStatus === 'expired' && ' (Expired)'}
+                          {expStatus === 'expiring-soon' && ' (Soon)'}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Additional Details */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.8rem', color: '#94A3B8' }}>
+                      {product.reorderLevel && (
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span>Reorder Level:</span>
+                          <span style={{ color: '#CBD5E1' }}>{product.reorderLevel}</span>
+                        </div>
+                      )}
+                      {product.category && (
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span>Category:</span>
+                          <span style={{ color: '#0EA5E9' }}>{product.category}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div style={{ marginTop: '1.25rem', display: 'flex', gap: '0.5rem' }}>
+                      <button
+                        style={{
+                          flex: 1,
+                          background: '#0EA5E9',
+                          color: '#080C14',
+                          padding: '0.6rem 1rem',
+                          borderRadius: '0.5rem',
+                          border: 'none',
+                          cursor: 'pointer',
+                          fontWeight: 600,
+                          fontSize: '0.85rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '0.4rem',
+                          transition: 'all 0.2s ease',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.background = '#38BDF8'; e.currentTarget.style.boxShadow = '0 0 16px rgba(14,165,233,0.35)'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.background = '#0EA5E9'; e.currentTarget.style.boxShadow = 'none'; }}
+                      >
+                        <FiShoppingCart /> Add to Cart
+                      </button>
+                      <button
+                        style={{
+                          background: 'rgba(14,165,233,0.08)',
+                          color: '#0EA5E9',
+                          padding: '0.6rem 0.75rem',
+                          borderRadius: '0.5rem',
+                          border: '1px solid rgba(14,165,233,0.15)',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(14,165,233,0.15)'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(14,165,233,0.08)'; }}
+                      >
+                        <FiStar />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </motion.div>
         ) : (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="bg-white rounded-xl shadow-md p-8 text-center"
+            style={{ ...cardBg, padding: '3rem', textAlign: 'center' }}
           >
-            <div className="text-gray-400 mb-4">
-              <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div style={{ color: '#475569', marginBottom: '1rem' }}>
+              <svg style={{ width: '4rem', height: '4rem', margin: '0 auto' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
-            <h3 className="text-xl font-medium text-gray-700 mb-2">
+            <h3 style={{ fontSize: '1.125rem', fontWeight: 500, color: '#CBD5E1', marginBottom: '0.5rem' }}>
               {searchTerm ? 'No products match your search' : 'No products available'}
             </h3>
-            <p className="text-gray-500">
+            <p style={{ color: '#64748B' }}>
               {searchTerm ? 'Try a different search term' : 'Add new products to get started'}
             </p>
           </motion.div>
         )}
       </div>
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={3000} theme="dark" />
     </div>
   );
 };

@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils';
 import axios from "axios";
-import { FiMail, FiLock, FiLogIn, FiUserPlus } from 'react-icons/fi';
+import { FiMail, FiLock, FiLogIn, FiUserPlus, FiEye, FiEyeOff } from 'react-icons/fi';
 import { StoreContext } from '../Context/StoreContext';
-
-
+import steelBoltVideo from '../assets/videos/Steel_bolt_component_202604190116.mp4';
+import avadhootLogo from '../assets/logo/avadhoot-logo.png';
 
 const Login = () => {
   const {backend_url,token,setToken} = useContext(StoreContext);
@@ -15,6 +15,7 @@ const Login = () => {
     password: ""
   });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -57,89 +58,134 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-md">
-        {/* Header with decorative element */}
-        <div className="bg-gradient-to-r from-indigo-600 to-blue-600 p-6 text-center">
-          <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
-          <p className="text-blue-100 mt-2">Sign in to manage your business</p>
+    <div className="login-page">
+
+      {/* ═══ LEFT PANEL — Brand / Video ═══ */}
+      <div className="login-left">
+
+        {/* Video background */}
+        <video
+          className="login-left__video"
+          src={steelBoltVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+
+        {/* Dark overlay */}
+        <div className="login-left__overlay" />
+
+        {/* Decorative watermark */}
+        <span className="login-left__watermark">AVADHOOT</span>
+
+        {/* Foreground branding */}
+        <div className="login-left__brand">
+          <img
+            src={avadhootLogo}
+            alt="Avadhoot Auto Components"
+            className="login-left__logo"
+          />
+          <p className="login-left__tagline">
+            PRECISION MACHINED COMPONENTS
+          </p>
+          <p className="login-left__cert">
+            ISO 1461 Certified &middot; Est. 2004
+          </p>
         </div>
+      </div>
 
-        <div className="p-8">
-          <form onSubmit={handleLogin} className="space-y-6">
-            {/* Email Field */}
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FiMail className="text-gray-400" />
+      {/* ═══ RIGHT PANEL — Form ═══ */}
+      <div className="login-right">
+        <div className="login-form-wrapper">
+
+          {/* Heading */}
+          <h1 className="login-form__heading">Portal Access</h1>
+          <p className="login-form__subtext">
+            Sign in to manage inventory and operations
+          </p>
+
+          <form onSubmit={handleLogin} className="login-form">
+
+            {/* Email */}
+            <div className="login-field">
+              <label className="login-label" htmlFor="login-email">Email</label>
+              <div className="login-input-wrap">
+                <FiMail className="login-input-icon" />
+                <input
+                  id="login-email"
+                  type="email"
+                  name="email"
+                  value={loginInfo.email}
+                  placeholder="you@company.com"
+                  onChange={handleChange}
+                  className="login-input"
+                  required
+                />
               </div>
-              <input
-                type="email"
-                name="email"
-                value={loginInfo.email}
-                placeholder="Email Address"
-                onChange={handleChange}
-                className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                required
-              />
             </div>
 
-            {/* Password Field */}
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FiLock className="text-gray-400" />
+            {/* Password */}
+            <div className="login-field">
+              <label className="login-label" htmlFor="login-password">Password</label>
+              <div className="login-input-wrap">
+                <FiLock className="login-input-icon" />
+                <input
+                  id="login-password"
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  value={loginInfo.password}
+                  placeholder="••••••••"
+                  onChange={handleChange}
+                  className="login-input login-input--password"
+                  required
+                  minLength="4"
+                />
+                <button
+                  type="button"
+                  className="login-eye-btn"
+                  onClick={() => setShowPassword(prev => !prev)}
+                  tabIndex={-1}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <FiEyeOff /> : <FiEye />}
+                </button>
               </div>
-              <input
-                type="password"
-                name="password"
-                value={loginInfo.password}
-                placeholder="Password"
-                onChange={handleChange}
-                className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                required
-                minLength="4"
-              />
             </div>
 
-            {/* Forgot Password Link */}
-            <div className="flex justify-end">
-              <Link 
-                to="/forgot-password" 
-                className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
-              >
+            {/* Forgot password */}
+            <div className="login-forgot-row">
+              <Link to="/forgot-password" className="login-forgot-link">
                 Forgot password?
               </Link>
             </div>
 
-            {/* Submit Button */}
+            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg shadow-md transition duration-300 flex items-center justify-center ${
-                loading ? 'opacity-70 cursor-not-allowed' : ''
-              }`}
+              className={`login-submit ${loading ? 'login-submit--loading' : ''}`}
             >
               {loading ? (
-                'Signing In...'
+                <span className="login-submit__spinner" />
               ) : (
                 <>
-                  Login <FiLogIn className="ml-2" />
+                  Sign In <FiLogIn className="login-submit__icon" />
                 </>
               )}
             </button>
 
-            {/* Signup Link */}
-            <div className="text-center text-sm text-gray-600 mt-6">
+            {/* Signup link */}
+            <p className="login-signup-row">
               Don't have an account?{' '}
-              <Link
-                to="/signup"
-                className="text-blue-600 hover:text-blue-800 font-medium hover:underline transition flex items-center justify-center"
-              >
-                Create Account <FiUserPlus className="ml-1" />
+              <Link to="/signup" className="login-signup-link">
+                Create Account <FiUserPlus style={{ marginLeft: 4, verticalAlign: 'middle' }} />
               </Link>
-            </div>
+            </p>
           </form>
         </div>
       </div>
+
       <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );

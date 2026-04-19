@@ -232,15 +232,15 @@ function InvoiceGenerator() {
     const finalTotal = subTotal + taxAmount;
 
     return (
-        <div className="min-h-screen dark-gradient p-4 md:p-8 animate-fade-in">
-            <div className="max-w-6xl mx-auto rounded-3xl glass-panel overflow-hidden shadow-[0_0_50px_rgba(236,72,153,0.15)] relative">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-pink-600/10 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none"></div>
-                <div className="bg-[#1a1625]/80 backdrop-blur-md p-8 border-b border-white/10 flex items-center justify-between relative z-10">
+        <div className="min-h-screen dark-gradient p-4 md:p-8">
+            <div className="max-w-6xl mx-auto rounded-[16px] bg-[#0F1927] overflow-hidden border border-[rgba(14,165,233,0.1)] relative">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-[rgba(14,165,233,0.06)] rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none"></div>
+                <div className="bg-[#0F1927] p-8 border-b border-[rgba(14,165,233,0.1)] flex items-center justify-between relative z-10">
                     <div>
-                        <h1 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 flex items-center gap-3">
-                            <FileText size={32} className="text-pink-500" /> Executive Dispatch & Billing
+                        <h1 className="text-3xl md:text-4xl font-bold text-[#E2E8F0] flex items-center gap-3">
+                            <FileText size={32} className="text-[#0EA5E9]" /> Executive Dispatch & Billing
                         </h1>
-                        <p className="text-gray-400 mt-2 text-sm tracking-wide uppercase">Generate B2B GST Invoices & Dispatch Notes</p>
+                        <p className="text-[#94A3B8] mt-2 text-sm tracking-[0.1em] uppercase">Generate B2B GST Invoices & Dispatch Notes</p>
                     </div>
                 </div>
 
@@ -249,87 +249,87 @@ function InvoiceGenerator() {
                         <div className="space-y-8 animate-slide-down">
                             {/* B2B Customer & Dispatch Info */}
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                <div className="glass-panel p-6 rounded-2xl bg-white/5 border border-white/10">
-                                    <h2 className="text-xl font-bold text-white border-b border-white/10 pb-4 mb-6 flex items-center"><Building className="text-pink-400 mr-2" size={20} /> Client Details</h2>
+                                <div className="p-6 rounded-[16px] bg-[#0F1927] border border-[rgba(14,165,233,0.1)]">
+                                    <h2 className="text-xl font-bold text-[#E2E8F0] border-b border-[rgba(14,165,233,0.1)] pb-4 mb-6 flex items-center"><Building className="text-[#0EA5E9] mr-2" size={20} /> Client Details</h2>
                                     <div className="space-y-5">
                                         <div>
-                                            <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Select Client Profile</label>
-                                            <select value={selectedCustomer} onChange={(e) => setSelectedCustomer(e.target.value)} className="w-full px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:ring-2 focus:ring-pink-500 outline-none [&>option]:text-gray-900 transition-all">
-                                                <option value="">-- Manual Entity Entry --</option>
-                                                {customerData.map(c => <option key={c._id} value={c._id}>{c.companyName || c.customerName} ({c.gstin})</option>)}
+                                            <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Select Client Profile</label>
+                                            <select value={selectedCustomer} onChange={(e) => setSelectedCustomer(e.target.value)} className="w-full px-4 py-3 rounded-lg input-glow transition-all" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>
+                                                <option value="" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>-- Manual Entity Entry --</option>
+                                                {customerData.map(c => <option key={c._id} value={c._id} style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>{c.companyName || c.customerName} ({c.gstin})</option>)}
                                             </select>
                                         </div>
                                         <div className="grid grid-cols-2 gap-5">
                                             <div className="col-span-2">
-                                                <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Company Name *</label>
-                                                <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)} className="w-full px-4 py-3 rounded-xl input-glow bg-black/40" required />
+                                                <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Company Name *</label>
+                                                <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)} className="w-full px-4 py-3 rounded-lg input-glow" placeholder="Enter company name" required />
                                             </div>
                                             <div>
-                                                <label className="block text-xs font-semibold text-pink-400 mb-2 uppercase tracking-wider">GSTIN *</label>
-                                                <input type="text" value={customerGstin} onChange={e => setCustomerGstin(e.target.value)} className="w-full px-4 py-3 rounded-xl input-glow border-pink-500/50 bg-pink-900/10 focus:border-pink-500 text-white font-mono uppercase" required />
+                                                <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">GSTIN *</label>
+                                                <input type="text" value={customerGstin} onChange={e => setCustomerGstin(e.target.value)} className="w-full px-4 py-3 rounded-lg input-glow font-mono uppercase" placeholder="Enter GSTIN" required />
                                             </div>
                                             <div>
-                                                <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Contact No.</label>
-                                                <input type="text" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} className="w-full px-4 py-3 rounded-xl input-glow bg-black/40" />
+                                                <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Contact No.</label>
+                                                <input type="text" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} className="w-full px-4 py-3 rounded-lg input-glow" placeholder="Phone number" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="glass-panel p-6 rounded-2xl bg-white/5 border border-white/10">
-                                    <h2 className="text-xl font-bold text-white border-b border-white/10 pb-4 mb-6 flex items-center"><Truck className="text-purple-400 mr-2" size={20} /> Logistics & PO</h2>
+                                <div className="p-6 rounded-[16px] bg-[#0F1927] border border-[rgba(14,165,233,0.1)]">
+                                    <h2 className="text-xl font-bold text-[#E2E8F0] border-b border-[rgba(14,165,233,0.1)] pb-4 mb-6 flex items-center"><Truck className="text-[#0EA5E9] mr-2" size={20} /> Logistics & PO</h2>
                                     <div className="grid grid-cols-2 gap-5">
                                         <div>
-                                            <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">PO Number</label>
-                                            <input type="text" value={poNumber} onChange={e => setPoNumber(e.target.value)} className="w-full px-4 py-3 rounded-xl input-glow bg-black/40 font-mono" />
+                                            <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">PO Number</label>
+                                            <input type="text" value={poNumber} onChange={e => setPoNumber(e.target.value)} className="w-full px-4 py-3 rounded-lg input-glow font-mono" placeholder="PO number" />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">PO Date</label>
-                                            <input type="date" value={poDate} onChange={e => setPoDate(e.target.value)} className="w-full px-4 py-3 rounded-xl input-glow bg-black/40" style={{ colorScheme: 'dark' }} />
+                                            <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">PO Date</label>
+                                            <input type="date" value={poDate} onChange={e => setPoDate(e.target.value)} className="w-full px-4 py-3 rounded-lg input-glow" style={{ colorScheme: 'dark' }} />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Dispatch Date</label>
-                                            <input type="date" value={dispatchDate} onChange={e => setDispatchDate(e.target.value)} className="w-full px-4 py-3 rounded-xl input-glow bg-black/40" style={{ colorScheme: 'dark' }} />
+                                            <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Dispatch Date</label>
+                                            <input type="date" value={dispatchDate} onChange={e => setDispatchDate(e.target.value)} className="w-full px-4 py-3 rounded-lg input-glow" style={{ colorScheme: 'dark' }} />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Vehicle Reg No.</label>
-                                            <input type="text" value={vehicleNumber} onChange={e => setVehicleNumber(e.target.value)} className="w-full px-4 py-3 rounded-xl input-glow bg-black/40 uppercase font-mono tracking-widest text-purple-300" placeholder="MH 12 AB 1234" />
+                                            <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Vehicle Reg No.</label>
+                                            <input type="text" value={vehicleNumber} onChange={e => setVehicleNumber(e.target.value)} className="w-full px-4 py-3 rounded-lg input-glow uppercase font-mono tracking-widest" placeholder="MH 12 AB 1234" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Components Selection */}
-                            <div className="glass-panel p-6 rounded-2xl bg-white/5 border border-white/10">
-                                <h2 className="text-xl font-bold text-white border-b border-white/10 pb-4 mb-6 flex items-center"><Box className="text-blue-400 mr-2" size={20} /> Component Roster</h2>
+                            <div className="p-6 rounded-[16px] bg-[#0F1927] border border-[rgba(14,165,233,0.1)]">
+                                <h2 className="text-xl font-bold text-[#E2E8F0] border-b border-[rgba(14,165,233,0.1)] pb-4 mb-6 flex items-center"><Box className="text-[#0EA5E9] mr-2" size={20} /> Component Roster</h2>
                                 
-                                <div className="p-5 rounded-xl border border-blue-500/30 bg-blue-500/5 flex flex-col md:flex-row gap-4 items-end mb-8">
+                                <div className="p-5 rounded-[16px] border border-[rgba(14,165,233,0.1)] bg-[#111C2D] flex flex-col md:flex-row gap-4 items-end mb-8">
                                     <div className="flex-grow w-full">
-                                        <label className="block text-xs font-semibold text-blue-300 mb-2 uppercase tracking-wider">Insert Component from Active Inventory</label>
-                                        <select value={selectedProduct} onChange={(e) => setSelectedProduct(e.target.value)} className="w-full px-4 py-3 rounded-xl input-glow bg-black/60 text-white font-medium border border-blue-500/50 [&>option]:text-gray-900">
-                                            <option value="">-- Await Component Selection --</option>
+                                        <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Insert Component from Active Inventory</label>
+                                        <select value={selectedProduct} onChange={(e) => setSelectedProduct(e.target.value)} className="w-full px-4 py-3 rounded-lg input-glow" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>
+                                            <option value="" style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>-- Await Component Selection --</option>
                                             {products.map(p => (
-                                                <option key={p._id} value={p._id}>{p.name} | Drw: {p.drawingNumber || 'N/A'}</option>
+                                                <option key={p._id} value={p._id} style={{ backgroundColor: '#111C2D', color: '#E2E8F0' }}>{p.name} | Drw: {p.drawingNumber || 'N/A'}</option>
                                             ))}
                                         </select>
                                     </div>
                                     <div className="w-full md:w-32">
-                                        <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Volume</label>
-                                        <input type="number" value={quantityInput} onChange={e => setQuantityInput(e.target.value)} min="1" className="w-full px-4 py-3 rounded-xl input-glow bg-black/40 text-center font-mono" placeholder="Qty" />
+                                        <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Volume</label>
+                                        <input type="number" value={quantityInput} onChange={e => setQuantityInput(e.target.value)} min="1" className="w-full px-4 py-3 rounded-lg input-glow text-center font-mono" placeholder="Qty" />
                                     </div>
                                     <div className="w-full md:w-48">
-                                        <label className="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Negotiated Rate (₹)</label>
-                                        <input type="number" value={rateInput} onChange={e => setRateInput(e.target.value)} min="0.01" step="0.01" className="w-full px-4 py-3 rounded-xl input-glow bg-black/40 text-right font-mono" placeholder="₹ 0.00" />
+                                        <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">Negotiated Rate (₹)</label>
+                                        <input type="number" value={rateInput} onChange={e => setRateInput(e.target.value)} min="0.01" step="0.01" className="w-full px-4 py-3 rounded-lg input-glow text-right font-mono" placeholder="₹ 0.00" />
                                     </div>
-                                    <button onClick={addItem} className="btn-primary w-full md:w-auto px-8 py-3 flex-shrink-0 flex justify-center shadow-[0_0_20px_rgba(217,70,239,0.3)]">
+                                    <button onClick={addItem} className="btn-primary w-full md:w-auto px-8 py-3 flex-shrink-0 flex justify-center items-center">
                                         <Plus size={20} className="mr-2" /> Inject
                                     </button>
                                 </div>
                                 
-                                <div className="flex justify-end items-center mb-4 pb-4 border-b border-white/5 space-x-3">
-                                    <span className="text-sm font-bold text-gray-400 tracking-widest uppercase">Apply 18% GST</span>
+                                <div className="flex justify-end items-center mb-4 pb-4 border-b border-[rgba(14,165,233,0.06)] space-x-3">
+                                    <span className="text-sm font-bold text-[#94A3B8] tracking-widest uppercase">Apply 18% GST</span>
                                     <div 
-                                        className={`w-14 h-7 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 shadow-inner ${applyGst ? 'bg-pink-500' : 'bg-gray-700'}`}
+                                        className={`w-14 h-7 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 shadow-inner ${applyGst ? 'bg-[#0EA5E9]' : 'bg-gray-700'}`}
                                         onClick={() => setApplyGst(!applyGst)}
                                     >
                                         <div className={`bg-white w-5 h-5 rounded-full shadow-md transform transition-transform duration-300 ${applyGst ? 'translate-x-7' : 'translate-x-0'}`}></div>
@@ -337,51 +337,51 @@ function InvoiceGenerator() {
                                 </div>
 
                                 {/* Items Table */}
-                                <div className="border border-white/10 rounded-xl overflow-hidden shadow-inner">
-                                    <table className="min-w-full divide-y divide-white/10">
-                                        <thead className="bg-black/60">
+                                <div className="border border-[rgba(14,165,233,0.1)] rounded-xl overflow-hidden">
+                                    <table className="min-w-full divide-y divide-[rgba(14,165,233,0.1)]">
+                                        <thead className="bg-[#111C2D]">
                                             <tr>
-                                                <th className="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Component Nomenclature</th>
-                                                <th className="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Drawing Ref.</th>
-                                                <th className="px-6 py-4 text-right text-xs font-bold text-gray-400 uppercase tracking-wider">Vol</th>
-                                                <th className="px-6 py-4 text-right text-xs font-bold text-gray-400 uppercase tracking-wider">Rate</th>
-                                                <th className="px-6 py-4 text-right text-xs font-bold text-pink-400 uppercase tracking-wider">Subtotal (₹)</th>
-                                                <th className="px-6 py-4 text-center text-xs font-bold text-gray-400 uppercase tracking-wider">Del</th>
+                                                <th className="px-6 py-4 text-left text-xs font-bold text-[#94A3B8] uppercase tracking-wider border-b border-[rgba(14,165,233,0.1)]">Component Nomenclature</th>
+                                                <th className="px-6 py-4 text-left text-xs font-bold text-[#94A3B8] uppercase tracking-wider border-b border-[rgba(14,165,233,0.1)]">Drawing Ref.</th>
+                                                <th className="px-6 py-4 text-right text-xs font-bold text-[#94A3B8] uppercase tracking-wider border-b border-[rgba(14,165,233,0.1)]">Vol</th>
+                                                <th className="px-6 py-4 text-right text-xs font-bold text-[#94A3B8] uppercase tracking-wider border-b border-[rgba(14,165,233,0.1)]">Rate</th>
+                                                <th className="px-6 py-4 text-right text-xs font-bold text-[#0EA5E9] uppercase tracking-wider border-b border-[rgba(14,165,233,0.1)]">Subtotal (₹)</th>
+                                                <th className="px-6 py-4 text-center text-xs font-bold text-[#94A3B8] uppercase tracking-wider border-b border-[rgba(14,165,233,0.1)]">Del</th>
                                             </tr>
                                         </thead>
-                                        <tbody className="divide-y divide-white/5 bg-black/20">
+                                        <tbody className="divide-y divide-[rgba(14,165,233,0.06)] bg-[#0F1927]">
                                             {items.length > 0 ? items.map((item, index) => (
-                                                <tr key={index} className="hover:bg-white/5 transition-colors group">
+                                                <tr key={index} className="hover:bg-[#111C2D] transition-colors group">
                                                     <td className="px-6 py-4 text-sm font-bold text-white tracking-wide">{item.productName}</td>
                                                     <td className="px-6 py-4 text-sm font-mono text-gray-500">{item.drawingNumber || '-'}</td>
                                                     <td className="px-6 py-4 text-sm text-right text-gray-300 font-mono">{item.quantity}</td>
                                                     <td className="px-6 py-4 text-sm text-right text-gray-300 font-mono">₹{(item.rate || item.price || 0).toFixed(2)}</td>
-                                                    <td className="px-6 py-4 text-sm text-right font-bold text-pink-300 font-mono">₹{item.total.toFixed(2)}</td>
+                                                    <td className="px-6 py-4 text-sm text-right font-bold text-accent-blue font-mono">₹{item.total.toFixed(2)}</td>
                                                     <td className="px-6 py-4 text-center">
                                                         <button onClick={() => removeItem(index)} className="p-2 text-gray-600 hover:text-red-400 bg-transparent hover:bg-red-500/10 rounded-lg transition-all border border-transparent hover:border-red-500/30 inline-block mx-auto">
                                                             <Trash2 size={16} />
                                                         </button>
                                                     </td>
                                                 </tr>
-                                            )) : <tr><td colSpan="6" className="text-center py-12 text-gray-500">No components scheduled for dispatch.</td></tr>}
+                                            )) : <tr><td colSpan="6" className="text-center py-12 text-[#475569]">No components scheduled for dispatch.</td></tr>}
                                         </tbody>
                                         {items.length > 0 && (
-                                            <tfoot className="bg-black/60 border-t border-white/20">
+                                            <tfoot className="bg-[#111C2D] border-t border-[rgba(14,165,233,0.1)]">
                                                 <tr>
-                                                    <td colSpan="4" className="px-6 py-4 text-right font-medium text-gray-400 uppercase text-xs tracking-wider">Subtotal:</td>
+                                                    <td colSpan="4" className="px-6 py-4 text-right font-medium text-[#94A3B8] uppercase text-xs tracking-wider">Subtotal:</td>
                                                     <td className="px-6 py-4 text-right font-bold text-white font-mono text-lg">₹{subTotal.toFixed(2)}</td>
                                                     <td></td>
                                                 </tr>
                                                 {applyGst && (
                                                 <tr>
-                                                    <td colSpan="4" className="px-6 py-3 text-right font-medium text-purple-400 uppercase text-xs tracking-wider">GST Impact (18%):</td>
-                                                    <td className="px-6 py-3 text-right font-bold text-purple-300 font-mono">₹{taxAmount.toFixed(2)}</td>
+                                                    <td colSpan="4" className="px-6 py-3 text-right font-medium text-[#0EA5E9] uppercase text-xs tracking-wider">GST Impact (18%):</td>
+                                                    <td className="px-6 py-3 text-right font-bold text-[#0EA5E9] font-mono">₹{taxAmount.toFixed(2)}</td>
                                                     <td></td>
                                                 </tr>
                                                 )}
-                                                <tr className="border-t border-white/10 bg-gradient-to-r from-transparent to-pink-900/20">
-                                                    <td colSpan="4" className="px-6 py-6 text-right font-extrabold text-pink-400 tracking-widest uppercase">Computed Grand Total:</td>
-                                                    <td className="px-6 py-6 text-right font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 text-2xl font-mono">₹{finalTotal.toFixed(2)}</td>
+                                                <tr className="border-t border-[rgba(14,165,233,0.1)]">
+                                                    <td colSpan="4" className="px-6 py-6 text-right font-extrabold text-[#0EA5E9] tracking-widest uppercase">Computed Grand Total:</td>
+                                                    <td className="px-6 py-6 text-right font-black text-[#0EA5E9] text-2xl font-mono">₹{finalTotal.toFixed(2)}</td>
                                                     <td></td>
                                                 </tr>
                                             </tfoot>
@@ -391,7 +391,7 @@ function InvoiceGenerator() {
                             </div>
 
                             <div className="flex justify-end mt-8">
-                                <button onClick={generateInvoice} disabled={items.length === 0 || isLoading} className="btn-primary px-10 py-4 flex items-center justify-center min-w-[300px] text-lg disabled:opacity-50 disabled:grayscale">
+                                <button onClick={generateInvoice} disabled={items.length === 0 || isLoading} className="btn-primary px-10 py-4 flex items-center justify-center min-w-[300px] text-lg font-bold tracking-wide">
                                     {isLoading ? <span className="animate-pulse">Synthesizing...</span> : <><Send size={20} className="mr-3" /> Authorize & Imprint Invoice</>}
                                 </button>
                             </div>
@@ -399,14 +399,14 @@ function InvoiceGenerator() {
                     ) : (
                         /* INVOICE PREVIEW & ACTIONS */
                         <div className="animate-fade-in">
-                            <div className="mb-8 flex flex-col md:flex-row gap-4 border-b border-white/10 pb-8 bg-black/20 p-6 rounded-2xl">
-                                <button onClick={handlePrint} className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 outline outline-transparent hover:outline-blue-500 text-white font-bold rounded-xl flex items-center justify-center transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)]">
+                            <div className="mb-8 flex flex-col md:flex-row gap-4 border-b border-[rgba(14,165,233,0.1)] pb-8 bg-[#111C2D] p-6 rounded-[16px]">
+                                <button onClick={handlePrint} className="flex-1 py-4 bg-[#0EA5E9] text-[#080C14] font-bold rounded-xl flex items-center justify-center transition-all hover:bg-[#38BDF8] shadow-[0_0_20px_rgba(14,165,233,0.3)]">
                                     <Printer size={20} className="mr-2" /> Execute Print
                                 </button>
-                                <button onClick={saveAsPDF} className="flex-1 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 outline outline-transparent hover:outline-emerald-500 text-white font-bold rounded-xl flex items-center justify-center transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                                <button onClick={saveAsPDF} className="flex-1 py-4 bg-[#0EA5E9] text-[#080C14] font-bold rounded-xl flex items-center justify-center transition-all hover:bg-[#38BDF8] shadow-[0_0_20px_rgba(14,165,233,0.3)]">
                                     <Download size={20} className="mr-2" /> Export to PDF
                                 </button>
-                                <button onClick={resetForm} className="flex-1 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 flex items-center justify-center transition-all">
+                                <button onClick={resetForm} className="flex-1 py-4 bg-[#111C2D] border border-[rgba(14,165,233,0.2)] text-[#E2E8F0] font-bold rounded-xl hover:bg-[#162236] flex items-center justify-center transition-all">
                                     <Plus size={20} className="mr-2" /> Start New Iteration
                                 </button>
                             </div>

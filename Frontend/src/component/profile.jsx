@@ -77,30 +77,32 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="bg-white shadow-xl rounded-lg overflow-hidden">
+    <div className="min-h-screen dark-gradient py-12 px-4 sm:px-6 lg:px-8 flex items-start justify-center">
+      <div className="w-full max-w-[600px] mx-auto">
+        <div className="bg-[#0F1927] border border-[rgba(14,165,233,0.1)] rounded-[20px] overflow-hidden p-10">
           {/* Profile Header */}
-          <div className="bg-indigo-600 px-6 py-8 text-center">
-            <div className="mx-auto h-24 w-24 rounded-full bg-white flex items-center justify-center shadow-lg mb-4">
-              <FiUser className="text-indigo-600 text-4xl" />
+          <div className="text-center mb-8">
+            <div className="mx-auto h-24 w-24 rounded-full bg-[rgba(14,165,233,0.1)] border-2 border-[rgba(14,165,233,0.3)] flex items-center justify-center mb-4">
+              <span className="text-[#0EA5E9] text-[2rem] font-bold">
+                {currentUser?.name?.charAt(0)?.toUpperCase() || currentUser?.businessName?.charAt(0)?.toUpperCase() || <FiUser className="text-[#0EA5E9] text-3xl" />}
+              </span>
             </div>
-            <h1 className="text-2xl font-bold text-white">
-              {currentUser?.businessName || 'Your Business'}
+            <h1 className="text-[1.5rem] font-bold text-[#E2E8F0]">
+              {currentUser?.businessName || currentUser?.name || 'Your Business'}
             </h1>
-            <p className="text-indigo-100 mt-1">
+            <p className="text-[#94A3B8] mt-1">
               {currentUser?.email || 'user@example.com'}
             </p>
           </div>
 
           {/* Profile Content */}
-          <div className="px-6 py-8">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-xl font-semibold text-gray-800">Profile Information</h2>
+          <div>
+            <div className="flex justify-between items-center mb-8 pb-4 border-b border-[rgba(14,165,233,0.1)]">
+              <h2 className="text-lg font-bold text-[#E2E8F0]">Profile Information</h2>
               {!editMode && (
                 <button 
                   onClick={() => setEditMode(true)}
-                  className="flex items-center text-indigo-600 hover:text-indigo-800"
+                  className="flex items-center text-[#0EA5E9] hover:text-[#38BDF8] transition-colors font-medium text-sm"
                 >
                   <FiEdit2 className="mr-1" /> Edit Profile
                 </button>
@@ -109,20 +111,20 @@ const Profile = () => {
 
             {editMode ? (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-5">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">
                       Business Name
                     </label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FiUser className="text-gray-400" />
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <FiUser className="text-[#94A3B8]" />
                       </div>
                       <input
                         name="businessName"
                         value={profile.businessName}
                         onChange={handleChange}
-                        className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                        className="pl-11 w-full px-4 py-3 rounded-lg input-glow"
                         placeholder="Your business name"
                         required
                       />
@@ -130,38 +132,38 @@ const Profile = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">
                       Email
                     </label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FiMail className="text-gray-400" />
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <FiMail className="text-[#475569]" />
                       </div>
                       <input
                         type="email"
                         name="email"
                         value={profile.email}
                         readOnly
-                        className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed"
+                        className="pl-11 w-full px-4 py-3 rounded-lg bg-[#111C2D] border border-[rgba(14,165,233,0.08)] text-[#475569] cursor-not-allowed"
                         placeholder="your@email.com"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-[0.75rem] font-semibold text-[#94A3B8] mb-2 uppercase tracking-[0.1em]">
                       Phone Number
                     </label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <FiPhone className="text-gray-400" />
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <FiPhone className="text-[#94A3B8]" />
                       </div>
                       <input
                         type="tel"
                         name="phoneNumber"
                         value={profile.phoneNumber}
                         onChange={handleChange}
-                        className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                        className="pl-11 w-full px-4 py-3 rounded-lg input-glow"
                         placeholder="9876543210"
                         required
                       />
@@ -169,18 +171,18 @@ const Profile = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-end space-x-4 pt-4">
+                <div className="flex justify-end space-x-4 pt-4 border-t border-[rgba(14,165,233,0.1)]">
                   <button
                     type="button"
                     onClick={() => setEditMode(false)}
-                    className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                    className="px-5 py-2.5 border border-[rgba(14,165,233,0.2)] rounded-lg text-[#94A3B8] hover:text-[#E2E8F0] font-bold transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={loading}
-                    className={`px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                    className={`px-6 py-2.5 bg-[#0EA5E9] hover:bg-[#38BDF8] text-[#080C14] rounded-lg font-bold transition-colors shadow-[0_0_20px_rgba(14,165,233,0.3)] ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
                     {loading ? (
                       'Processing...'
@@ -193,23 +195,23 @@ const Profile = () => {
                 </div>
               </form>
             ) : (
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <p className="text-sm text-gray-500">Business Name</p>
-                    <p className="text-gray-900 font-medium mt-1">
+              <div className="space-y-5">
+                <div className="space-y-4">
+                  <div className="bg-[#111C2D] rounded-lg p-4 border border-[rgba(14,165,233,0.06)]">
+                    <p className="text-[0.75rem] text-[#94A3B8] uppercase tracking-[0.1em] mb-1">Business Name</p>
+                    <p className="text-[#E2E8F0] font-medium">
                       {currentUser?.name || 'Not provided'}
                     </p>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Email</p>
-                    <p className="text-gray-900 font-medium mt-1">
+                  <div className="bg-[#111C2D] rounded-lg p-4 border border-[rgba(14,165,233,0.06)]">
+                    <p className="text-[0.75rem] text-[#94A3B8] uppercase tracking-[0.1em] mb-1">Email</p>
+                    <p className="text-[#E2E8F0] font-medium">
                       {currentUser?.email || 'Not provided'}
                     </p>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Phone Number</p>
-                    <p className="text-gray-900 font-medium mt-1">
+                  <div className="bg-[#111C2D] rounded-lg p-4 border border-[rgba(14,165,233,0.06)]">
+                    <p className="text-[0.75rem] text-[#94A3B8] uppercase tracking-[0.1em] mb-1">Phone Number</p>
+                    <p className="text-[#E2E8F0] font-medium">
                       {currentUser?.phoneNumber || 'Not provided'}
                     </p>
                   </div>
@@ -219,7 +221,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={3000} theme="dark" />
     </div>
   );
 };
