@@ -1,82 +1,139 @@
-###
+# 🏭 Avadhoot Auto Components
+### B2B Manufacturing & Inventory Management System
 
-# 🏭 Avadhoot Auto Components – B2B Manufacturing & Inventory Management System
+A premium, full-stack B2B platform built for **Avadhoot Auto Components, Pune** — 
+a precision machined components manufacturer serving the Automotive, Construction, 
+and Hydraulic industries since 2004.
 
-**Avadhoot Auto Components** is a high-end, "Industrial Midnight" B2B manufacturing and inventory management platform designed for precision manufacturing operations. Featuring a premium glassmorphic UI, this system handles everything from deep inventory tracking to automated billing for enterprise and medium-scale manufacturing clients.
-
-
-## 🚀 Key Features
-
-- 🧾 **B2B Supplier & Customer Management**: Keep precise track of supplier deliveries, manufacturer credits, and large-scale borrowing histories.
-- 📄 **Rapid Industrial Billing**: High-speed, robust bill generator optimized for wholesale auto component distribution with barcode scanning capabilities.
-- 📦 **Barcode Infrastructure**: Generate and print industry-standard barcode labels for auto components for seamless tracking.
-- ⏰ **Quality Control & Expiry Reminders**: Automated tracking and alerts for component quality assurance and warranty periods.
-- 📲 **WhatsApp Invoicing Integration**: Dispatch quotes, formal invoices, and bills directly to manufacturing clients via WhatsApp.
-- 📊 **Executive Analytics Dashboard**: Dynamic, data-dense reporting metrics featuring:
-  - Daily, weekly, and monthly wholesale revenue analysis.
-  - Granular stock levels and inventory turnover rate insights.
-- 📝 **Quality Assurance Remarks**: Comprehensive note-taking mechanisms for finished components, client returns, or defective parts tracking.
-- 🔍 **Premium "Industrial Midnight" UI**: A dark-mode, precision-focused interface explicitly designed to empower productivity in professional manufacturing environments.
+> Third Year Industry Project — VIIT Pune  
+> Industry Partner: Avadhoot Auto Components
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## ✨ What Was Built
+
+This project involved a complete ground-up frontend redesign of an existing 
+inventory management system, along with backend authentication, WhatsApp 
+integration, and full-stack debugging.
+
+The new frontend features an "Industrial Midnight" dark theme with cinematic 
+animations, video backgrounds, and a premium B2B UI.
+
+### Frontend Redesign
+- Cinematic logo intro animation on page load
+- Full landing page with 3 AI-generated video backgrounds
+- Scrolling trust bar, animated stat counters, product showcase
+- Facilities section, Why Choose Us, Portal CTA with spark explosion video
+- Premium login page with split-panel video background
+- Complete app UI restyled — Dashboard, Invoices, Inventory, Clients, 
+  Suppliers, Profile, About, Products
+
+### Backend Development
+- JWT-based authentication system — secure login, token generation, 
+  protected route middleware
+- WhatsApp invoicing integration via Twilio — dispatch formal B2B invoices 
+  and payment reminders directly to clients
+- Full-stack debugging — API route fixes, CORS configuration, port 
+  resolution, MongoDB connection stability
+
+### App Features
+- 🧾 B2B Supplier & Customer Management
+- 📄 Rapid Industrial Billing with GST support
+- 📦 Barcode Infrastructure for component tracking
+- 📲 WhatsApp Invoicing via Twilio
+- 📊 Executive Analytics Dashboard — Revenue Telemetry, Activity Log
+- 🔍 Component Inventory with stock level alerts
+- 👥 B2B Client Directory with Purchase Ledger
+
+---
+
+## 🎨 Design System — Industrial Midnight
+
+| Token | Value | Usage |
+|---|---|---|
+| Background | `#080C14` | Page background |
+| Surface | `#0F1927` | Cards, panels |
+| Card | `#111C2D` | Nested elements |
+| Accent Blue | `#0EA5E9` | Primary accent |
+| Accent Amber | `#F59E0B` | Money, rates, warnings |
+| Text Primary | `#E2E8F0` | Headings |
+| Text Muted | `#94A3B8` | Body text |
+
+---
+
+## 🛠️ Tech Stack
 
 ### Frontend
-- **React.js** (UI Logic & Component Structure)
-- **Tailwind CSS** (Industrial Midnight UI/UX Styling)
-- **Vite** (High-performance build tooling)
+- React.js + Vite
+- Tailwind CSS
+- CSS Keyframe Animations
+- Lucide React Icons
 
 ### Backend
-- **Node.js** & **Express.js** (Robust backend API layer)
-- **MongoDB** & **Mongoose** (Scalable document database)
-- **Cloudinary** (Cloud repository for component images)
-- **Twilio** (Real-time WhatsApp communications)
-- **JWT** (Secure, token-based authentication)
+- Node.js + Express.js
+- MongoDB + Mongoose
+- Cloudinary (component images)
+- Twilio (WhatsApp invoicing)
+- JWT Authentication
 
 ---
 
-## 💻 Local Development Setup
+## 💻 Local Setup
 
-Follow these steps to deploy the Avadhoot Auto Components system in your local environment.
-
-### 1. Repository Access
+### 1. Clone the repo
 ```bash
-git clone <repository-url>
-cd ShopManager-Smart-Inventory-Management-App
+git clone https://github.com/trolog5369/TY-Industry-Project.git
+cd TY-Industry-Project
 ```
 
-### 2. Backend Initialization
-Navigate to the backend directory to configure environment logic:
+### 2. Backend setup
 ```bash
 cd backend
 npm install
 ```
 
-Create a `.env` file in the `backend` directory and add the necessary API configurations:
+Create `backend/.env`:
 ```env
-PORT=8080
+PORT=5000
 MONGO_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
 CLOUDINARY_NAME=your_cloudinary_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+TWILIO_ACCOUNT_SID=your_twilio_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_WHATSAPP_NUMBER=your_twilio_whatsapp_number
 ```
 
-Launch the backend API layer:
+Start backend:
 ```bash
 npm run server
 ```
 
-### 3. Frontend Initialization
-Open a new terminal window, navigate to the Frontend directory, and initialize the client:
+### 3. Frontend setup
 ```bash
 cd Frontend
 npm install
 npm run dev
 ```
 
-The enterprise frontend interface will start on your local Vite server (typically accessible at `http://localhost:5173`).
+Frontend runs at `http://localhost:5173`  
+Backend runs at `http://localhost:5000`
 
+---
 
+## 👥 Team
 
+| Name | Role |
+|---|---|
+| Pranav Gaikwad | Frontend Design & Development, JWT Authentication, WhatsApp Integration, Full-stack Debugging |
+| Yash Shende | Backend Architecture, Database Design, API Development |
+
+---
+
+## 🏢 Industry Partner
+
+**Avadhoot Auto Components**  
+Gat No. 1635, Vrudhashram Road, Ramdasnagar, Chikhali, Pune-411062  
+ISO 1461 Certified | Est. 2004  
+[avadhootauto.com](https://avadhootauto.com)
